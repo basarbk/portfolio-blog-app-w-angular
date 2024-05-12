@@ -2,7 +2,7 @@
     <h1>Sign Up</h1>
     <div>
         <label for="email">E-mail</label>
-        <input id="email" type="email"/>
+        <input id="email" type="email" [formControl]="email"/>
     </div>
-    <button disabled>Sign Up</button>
+    <button [disabled]="isDisabled()">Sign Up</button>
 </form>
