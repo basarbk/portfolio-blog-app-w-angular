@@ -1,8 +1,18 @@
-<form (submit)="submit($event)">
-    <h1>Sign Up</h1>
-    <div>
-        <label for="email">E-mail</label>
-        <input id="email" type="email" [formControl]="email"/>
+<div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+    <div class="card">
+        <form (submit)="submit($event)">
+            <div class="card-header text-center">
+                <h1>Sign Up</h1>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input class="form-control" id="email" type="email" [formControl]="email"/>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" [disabled]="isDisabled()">Sign Up</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <button [disabled]="isDisabled()">Sign Up</button>
-</form>
+</div>

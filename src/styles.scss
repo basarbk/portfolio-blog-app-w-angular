@@ -1,1 +1,23 @@
+$primary: #cb095a;
+$border-width: 2px;
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+.card {
+    border: 1px solid black;
+    box-shadow: 2px 2px black;
+}
+
+.btn {
+    box-shadow: 3px 3px black;
+    transform: translate(-3px, -3px);
+    transition: unset;
+    &:active {
+        box-shadow: 1px 1px black;
+        transform: translate(-1px, -1px);
+    }
+    &:disabled {
+        box-shadow: unset;
+        transform: unset;
+    }
+}
