@@ -13,12 +13,21 @@ export class SignUpPageComponent {
 
   email = new FormControl<string>('', {nonNullable: true})
 
+  apiProgress: boolean = false;
+
+  successMessage: string = ''
+
   isDisabled(){
-    return !this.email.value
+    return !this.email.value || this.apiProgress
   }
 
   submit(event: Event){
+    this.apiProgress = true
+    this.successMessage = ''
     event.preventDefault()
-    this.apiService.signUp(this.email.value).subscribe()
+    this.apiService.signUp(this.email.value).subscribe((data) => {
+      this.apiProgress = false
+      this.successMessage = data.message
+    })
   }
 }

@@ -9,8 +9,18 @@
                     <label for="email" class="form-label">E-mail</label>
                     <input class="form-control" id="email" type="email" [formControl]="email"/>
                 </div>
+                @if (successMessage) {
+                    <div class="alert alert-success" role="alert">
+                        {{successMessage}}
+                      </div>
+                }
+
                 <div class="text-center">
-                    <button class="btn btn-primary" [disabled]="isDisabled()">Sign Up</button>
+                    <button class="btn btn-primary" [disabled]="isDisabled()">
+                        @if (apiProgress) {
+                            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                        }
+                        Sign Up</button>
                 </div>
             </div>
         </form>

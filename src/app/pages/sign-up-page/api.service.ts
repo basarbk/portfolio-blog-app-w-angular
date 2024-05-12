@@ -9,6 +9,6 @@ export class ApiService {
   constructor(private httpClient: HttpClient) { }
 
   signUp(email: string){
-    return this.httpClient.post('/api/users', { email })
+    return this.httpClient.post<{message: string}>('/api/users', { email })
   }
 }
