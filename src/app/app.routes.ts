@@ -3,6 +3,7 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CallbackPageComponent } from './pages/callback-page/callback-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { ArticleEditorPageComponent } from './pages/article/article-editor-page/article-editor-page.component';
 
 export const routes: Routes = [{
     path: 'signup',
@@ -18,6 +19,10 @@ export const routes: Routes = [{
 {
     path: 'login',
     component: LoginPageComponent,
+},
+{
+    path: 'article/new',
+    component: ArticleEditorPageComponent,
 }
 
 ];
