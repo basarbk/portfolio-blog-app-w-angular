@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from './api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class SignUpPageComponent {
   private apiService = inject(ApiService)
 
-  email = new FormControl<string>('', {nonNullable: true})
+  email = new FormControl<string>('', {nonNullable: true, validators: [Validators.email]})
 
   apiProgress: boolean = false;
 
@@ -27,8 +27,15 @@ export class SignUpPageComponent {
     })
   }
 
+  get emailError(){
+    if(this.email.errors && (this.email.touched || this.email.dirty)) {
+      return "Invalid email"
+    }
+    return this.errors?.email
+  }
+
   isDisabled(){
-    return !this.email.value || this.apiProgress
+    return !this.email.value || this.apiProgress || !this.email.valid
   }
 
   submit(event: Event){
