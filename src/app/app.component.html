@@ -1,4 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container mt-3">
+    <a routerLink="/callback" [queryParams]="{token: 123, operation: 'register'}">Callback 123</a>
+    <a class="d-block" routerLink="/callback" [queryParams]="{token: 456, operation: 'register'}">Callback 456</a>
+
     <router-outlet />
 </div>
