@@ -16,6 +16,7 @@ export class SignUpPageComponent {
   apiProgress: boolean = false;
 
   successMessage: string = ''
+  errorMessage: string = ''
 
   isDisabled(){
     return !this.email.value || this.apiProgress
@@ -24,10 +25,17 @@ export class SignUpPageComponent {
   submit(event: Event){
     this.apiProgress = true
     this.successMessage = ''
+    this.errorMessage = ''
     event.preventDefault()
-    this.apiService.signUp(this.email.value).subscribe((data) => {
-      this.apiProgress = false
-      this.successMessage = data.message
+    this.apiService.signUp(this.email.value).subscribe({
+      next: (data) => {
+        this.apiProgress = false
+        this.successMessage = data.message
+      },
+      error: () => {
+        this.apiProgress = false
+        this.errorMessage = 'Unexpected error occurred, please try again'
+      }
     })
   }
 }
