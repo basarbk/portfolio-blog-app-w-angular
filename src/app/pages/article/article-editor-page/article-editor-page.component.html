@@ -16,7 +16,11 @@
     @if(id) {
     <app-publish-button [id]="id"></app-publish-button>
     }
-    <app-button variant="success" (onClick)="submit()">
+    <app-button
+      variant="success"
+      (onClick)="submit()"
+      [apiProgress]="apiProgress"
+    >
       @if (id) { Update } @else { Save }
     </app-button>
   </div>

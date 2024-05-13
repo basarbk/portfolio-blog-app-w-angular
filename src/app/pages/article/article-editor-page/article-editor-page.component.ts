@@ -17,8 +17,10 @@ export class ArticleEditorPageComponent {
   content = new FormControl<string>('', { nonNullable: true });
 
   id: number = 0;
+  apiProgress = false;
 
   submit() {
+    this.apiProgress = true;
     this.articleService
       .createOrUpdateArticle(
         {
@@ -28,6 +30,7 @@ export class ArticleEditorPageComponent {
         this.id
       )
       .subscribe((data) => {
+        this.apiProgress = false;
         this.id = data.id;
       });
   }

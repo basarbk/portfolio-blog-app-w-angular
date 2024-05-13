@@ -1,6 +1,7 @@
 <app-button
   (onClick)="onClick()"
   [variant]="published ? 'secondary' : 'primary'"
+  [apiProgress]="apiProgress"
 >
   @if (published) {Un-publish} @else {Publish}
 </app-button>

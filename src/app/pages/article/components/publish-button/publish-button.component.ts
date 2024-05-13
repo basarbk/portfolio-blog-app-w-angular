@@ -15,8 +15,12 @@ export class PublishButtonComponent {
 
   published: boolean = false;
 
+  apiProgress = false;
+
   onClick() {
+    this.apiProgress = true;
     this.articleService.togglePublish(this.id).subscribe((data) => {
+      this.apiProgress = false;
       this.published = data.published;
     });
   }
