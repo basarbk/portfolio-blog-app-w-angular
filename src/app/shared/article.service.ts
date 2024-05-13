@@ -2,16 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ArticleService {
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) { }
-
-  createOrUpdateArticle(body: { title: string, content: string}, id: number) {
-    if(id) {
-      return this.httpClient.put<{id: number}>('/api/articles/'+id, body)
+  createOrUpdateArticle(body: { title: string; content: string }, id: number) {
+    if (id) {
+      return this.httpClient.put<{ id: number }>('/api/articles/' + id, body);
     }
-    return this.httpClient.post<{id: number}>('/api/articles', body)
+    return this.httpClient.post<{ id: number }>('/api/articles', body);
+  }
+
+  togglePublish(id: number) {
+    return this.httpClient.patch<{ published: boolean }>(
+      `/api/articles/${id}/publish`,
+      {}
+    );
   }
 }
