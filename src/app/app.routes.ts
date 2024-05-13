@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CallbackPageComponent } from './pages/callback-page/callback-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 export const routes: Routes = [{
     path: 'signup',
@@ -13,6 +14,10 @@ export const routes: Routes = [{
 {
     path: 'callback',
     component: CallbackPageComponent,
+},
+{
+    path: 'login',
+    component: LoginPageComponent,
 }
 
 ];

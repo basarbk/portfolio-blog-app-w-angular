@@ -1,0 +1,27 @@
+<div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+    <div class="card">
+        <form (submit)="submit($event)">
+            <div class="card-header text-center">
+                <h1>Login</h1>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input class="form-control" id="email" type="email" [formControl]="email"/>
+                    <span class="small text-danger">{{emailError}}</span>
+                </div>
+                @if (successMessage) {
+                    <app-alert>{{successMessage}}</app-alert>
+                }
+                @if (errorMessage) {
+                    <app-alert variant="danger">{{errorMessage}}</app-alert>
+                }
+                <div class="text-center">
+                    <app-button [disabled]="isDisabled()" [apiProgress]="apiProgress">
+                        Login
+                    </app-button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
