@@ -1,1 +1,5 @@
-<p>callback-page works!</p>
+@if(status === 'loading') {
+    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+} @else {
+    <app-alert [variant]="status === 'success' ? 'success' : 'danger'">{{message}}</app-alert>
+}
