@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 
 type User = {
   id: number;
@@ -22,5 +23,12 @@ export class AuthService {
     image: null,
   })
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
+
+  auth(token: string, operation: string) {
+    return this.httpClient.post<User>('/api/auth', {
+      token,
+      operation
+    }).pipe(tap((data) => this.user.next(data)))
+  }
 }

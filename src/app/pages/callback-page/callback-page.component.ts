@@ -1,8 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertComponent } from '../../components/alert/alert.component';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
+import { AuthService } from '../../shared/auth.service';
 
 @Component({
   selector: 'app-callback-page',
@@ -14,7 +15,7 @@ export class CallbackPageComponent implements OnInit{
 
   private route = inject(ActivatedRoute);
 
-  private httpClient = inject(HttpClient);
+  private authService = inject(AuthService);
 
   status: 'loading' | 'success' | 'fail' = 'loading'
 
@@ -23,10 +24,7 @@ export class CallbackPageComponent implements OnInit{
   ngOnInit(): void {
     this.route.queryParams.subscribe((queryParams) => {
       this.status = 'loading'
-      this.httpClient.post('/api/auth', {
-        token: queryParams['token'],
-        operation: queryParams['operation']
-      }).subscribe({
+      this.authService.auth(queryParams['token'], queryParams['operation']).subscribe({
         next: () => {
           this.status = 'success'
           this.message = 'Account is created'
