@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from './api.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -18,6 +19,14 @@ export class SignUpPageComponent {
   successMessage: string = ''
   errorMessage: string = ''
 
+  errors: { email: string} | undefined;
+
+  constructor(){
+    this.email.valueChanges.subscribe(() => {
+      this.errors = undefined
+    })
+  }
+
   isDisabled(){
     return !this.email.value || this.apiProgress
   }
@@ -32,9 +41,13 @@ export class SignUpPageComponent {
         this.apiProgress = false
         this.successMessage = data.message
       },
-      error: () => {
+      error: (httpError: HttpErrorResponse) => {
+        if(httpError.status === 400) {
+          this.errors = httpError.error.validationErrors
+        } else {
+          this.errorMessage = 'Unexpected error occurred, please try again'
+        }
         this.apiProgress = false
-        this.errorMessage = 'Unexpected error occurred, please try again'
       }
     })
   }

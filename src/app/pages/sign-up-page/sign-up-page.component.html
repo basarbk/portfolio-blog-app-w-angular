@@ -8,6 +8,7 @@
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
                     <input class="form-control" id="email" type="email" [formControl]="email"/>
+                    <span class="small text-danger">{{errors?.email}}</span>
                 </div>
                 @if (successMessage) {
                     <div class="alert alert-success" role="alert">
