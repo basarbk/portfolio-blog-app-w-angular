@@ -18,4 +18,8 @@ export class NavbarComponent {
     })
   }
 
+  logout(){
+    this.authService.logout().subscribe()
+  }
+
 }

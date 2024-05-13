@@ -32,3 +32,11 @@ $border-width: 2px;
 .navbar {
     border-bottom: 3px solid black;
 }
+
+.nav-item span {
+    cursor: pointer;
+    &:hover {
+        text-shadow: 2px 2px black;
+        transform: translate(-2px, -2px);
+    }
+}

@@ -42,4 +42,15 @@ export class AuthService {
       operation
     }).pipe(tap((data) => this.user.next(data)))
   }
+
+  logout(){
+    return this.httpClient.post('/api/auth/logout', {})
+    .pipe(tap({finalize: () => this.user.next({
+      id: 0,
+      name: '',
+      handle: '',
+      email: '',
+      image: null,
+    })}))
+  }
 }
