@@ -2,11 +2,12 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertComponent } from '../../components/alert/alert.component';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-callback-page',
   standalone: true,
-  imports: [AlertComponent],
+  imports: [AlertComponent, SpinnerComponent],
   templateUrl: './callback-page.component.html'
 })
 export class CallbackPageComponent implements OnInit{

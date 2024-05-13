@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Variant } from '../types';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [],
+  imports: [SpinnerComponent],
   templateUrl: './button.component.html'
 })
 export class ButtonComponent {
