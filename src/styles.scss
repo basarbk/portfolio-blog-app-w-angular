@@ -21,3 +21,14 @@ $border-width: 2px;
         transform: unset;
     }
 }
+
+.navbar a {
+    &:hover {
+        text-shadow: 2px 2px black;
+        transform: translate(-2px, -2px);
+    }
+}
+
+.navbar {
+    border-bottom: 3px solid black;
+}
