@@ -23,7 +23,18 @@ export class AuthService {
     image: null,
   })
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { 
+    const storedData = localStorage.getItem('auth')
+    if(storedData) {
+      try {
+        this.user.next(JSON.parse(storedData))
+      } catch {}
+    }
+
+    this.user.subscribe((data) => {
+      localStorage.setItem('auth', JSON.stringify(data))
+    })
+  }
 
   auth(token: string, operation: string) {
     return this.httpClient.post<User>('/api/auth', {
