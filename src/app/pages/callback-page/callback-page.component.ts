@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertComponent } from '../../components/alert/alert.component';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
 import { AuthService } from '../../shared/auth.service';
@@ -17,6 +17,8 @@ export class CallbackPageComponent implements OnInit{
 
   private authService = inject(AuthService);
 
+  private router = inject(Router);
+
   status: 'loading' | 'success' | 'fail' = 'loading'
 
   message = '';
@@ -26,8 +28,12 @@ export class CallbackPageComponent implements OnInit{
       this.status = 'loading'
       this.authService.auth(queryParams['token'], queryParams['operation']).subscribe({
         next: () => {
-          this.status = 'success'
-          this.message = 'Account is created'
+          if(queryParams['operation'] === 'login') {
+            this.router.navigate(['/'])
+          } else {
+            this.status = 'success'
+            this.message = 'Account is created'
+          }
         },
         error: (httpError: HttpErrorResponse) => {
           this.status = 'fail'
