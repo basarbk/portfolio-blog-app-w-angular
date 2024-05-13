@@ -1,4 +1,4 @@
-<button [class]="buttonClass" [disabled]="disabled || apiProgress">
+<button [class]="buttonClass" [disabled]="disabled || apiProgress" (click)="onClick.emit()">
     @if (apiProgress) {
         <app-spinner/>
     }

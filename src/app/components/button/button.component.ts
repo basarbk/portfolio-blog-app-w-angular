@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Variant } from '../types';
 import { SpinnerComponent } from '../spinner/spinner.component';
 
@@ -15,6 +15,8 @@ export class ButtonComponent {
   @Input() disabled = false
 
   @Input() apiProgress = false
+
+  @Output() onClick = new EventEmitter<void>()
 
   get buttonClass(){
     const classes = ['btn']
