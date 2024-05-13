@@ -1,0 +1,6 @@
+<button [class]="buttonClass" [disabled]="disabled || apiProgress">
+    @if (apiProgress) {
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+    }
+    <ng-content></ng-content>    
+</button>

@@ -11,21 +11,15 @@
                     <span class="small text-danger">{{emailError}}</span>
                 </div>
                 @if (successMessage) {
-                    <div class="alert alert-success" role="alert">
-                        {{successMessage}}
-                      </div>
+                    <app-alert>{{successMessage}}</app-alert>
                 }
                 @if (errorMessage) {
-                    <div class="alert alert-danger" role="alert">
-                        {{errorMessage}}
-                      </div>
+                    <app-alert variant="danger">{{errorMessage}}</app-alert>
                 }
                 <div class="text-center">
-                    <button class="btn btn-primary" [disabled]="isDisabled()">
-                        @if (apiProgress) {
-                            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                        }
-                        Sign Up</button>
+                    <app-button [disabled]="isDisabled()" [apiProgress]="apiProgress">
+                        Sign Up
+                    </app-button>
                 </div>
             </div>
         </form>

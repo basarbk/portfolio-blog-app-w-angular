@@ -2,11 +2,13 @@ import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from './api.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AlertComponent } from '../../components/alert/alert.component';
+import { ButtonComponent } from '../../components/button/button.component';
 
 @Component({
   selector: 'app-sign-up-page',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AlertComponent, ButtonComponent],
   templateUrl: './sign-up-page.component.html'
 })
 export class SignUpPageComponent {
@@ -35,7 +37,7 @@ export class SignUpPageComponent {
   }
 
   isDisabled(){
-    return !this.email.value || this.apiProgress || !this.email.valid
+    return !this.email.value || !this.email.valid
   }
 
   submit(event: Event){
