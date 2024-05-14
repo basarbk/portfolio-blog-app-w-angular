@@ -27,4 +27,8 @@ export class ArticleService {
       params: { page, size, sort: 'published_at' },
     });
   }
+
+  fetchArticle(idOrSlug: string) {
+    return this.httpClient.get<Article>(`/api/articles/${idOrSlug}`);
+  }
 }

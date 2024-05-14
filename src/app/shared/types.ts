@@ -11,6 +11,7 @@ export type Article = {
   slug: string;
   image: string | null;
   publishedAt: string | null;
+  content: string;
   author: Author;
 };
 

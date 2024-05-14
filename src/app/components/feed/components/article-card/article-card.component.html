@@ -1,5 +1,10 @@
 <div class="card mb-3">
   <div class="card-body">
-    {{ article.title }}
+    <a
+      class="text-decoration-none text-dark fs-3"
+      [routerLink]="'/' + article.author.handle + '/' + article.slug"
+    >
+      {{ article.title }}
+    </a>
   </div>
 </div>
