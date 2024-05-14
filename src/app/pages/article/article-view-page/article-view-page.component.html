@@ -1,6 +1,12 @@
+@switch (status) { @case ('success') {
 <main class="bg-white border rounded py-3 px-5">
   <div>
     <h1 class="text-capitalize">{{ article?.title }}</h1>
   </div>
   <div>{{ article?.content }}</div>
 </main>
+} @case ('fail') {
+<app-alert variant="danger">{{ message }}</app-alert>
+} @default {
+<app-spinner [full]="true" size="regular"></app-spinner>
+} }
