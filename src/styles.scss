@@ -56,3 +56,8 @@ $border-width: 2px;
     border: 0;
     border-bottom: 1px solid var(--bs-danger);
 }
+
+p.markdown img {
+    width: 100vw;
+    max-width: 100%;
+}

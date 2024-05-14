@@ -24,6 +24,14 @@ const marked = new Marked(
   })
 );
 
+marked.use({
+  renderer: {
+    paragraph: (text) => {
+      return `<p class="markdown">${text}</p>`;
+    },
+  },
+});
+
 @Component({
   selector: 'app-article-view-page',
   standalone: true,

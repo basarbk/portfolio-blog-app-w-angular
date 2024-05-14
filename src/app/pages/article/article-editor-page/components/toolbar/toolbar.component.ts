@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { FileService } from '../../../../../shared/file.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,6 +8,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './toolbar.component.html',
 })
 export class ToolbarComponent {
+  private fileService = inject(FileService);
+
   actions = [
     {
       icon: 'format_bold',
@@ -37,5 +40,15 @@ export class ToolbarComponent {
     selectedText = syntax + selectedText + syntax;
     this.editor.setRangeText(selectedText, start, end);
     this.onChange.emit(this.editor.value);
+  }
+
+  onSelectImage(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    if (!fileInput.files) return;
+    this.fileService.uploadFile(fileInput.files[0]).subscribe((data) => {
+      const imageText = `\n![image alt text](/api/assets/${data.filename})`;
+      this.editor.setRangeText(imageText);
+      this.onChange.emit(this.editor.value);
+    });
   }
 }

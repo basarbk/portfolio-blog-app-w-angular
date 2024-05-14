@@ -7,4 +7,11 @@
     <span class="material-symbols-outlined">{{ action.icon }}</span>
   </button>
   }
+  <button
+    class="btn btn-sm btn-outline-dark icon-link"
+    (click)="imageInput.click()"
+  >
+    <span class="material-symbols-outlined">image</span>
+    <input type="file" hidden #imageInput (change)="onSelectImage($event)" />
+  </button>
 </div>
