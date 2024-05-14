@@ -9,11 +9,20 @@
           [publishedAt]="article.publishedAt"
         />
         @if (isOwnedByLoggedInUser) {
-        <app-publish-button
-          [id]="article.id"
-          [published]="!!article.publishedAt"
-          (togglePublish)="onTogglePublish($event)"
-        />
+        <div class="d-flex gap-2">
+          <app-publish-button
+            [id]="article.id"
+            [published]="!!article.publishedAt"
+            (togglePublish)="onTogglePublish($event)"
+          />
+          <a
+            class="btn btn-warning"
+            [routerLink]="
+              '/' + article.author.handle + '/' + article.slug + '/edit'
+            "
+            >Edit</a
+          >
+        </div>
         }
       </div>
       <div>

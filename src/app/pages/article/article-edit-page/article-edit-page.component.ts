@@ -1,32 +1,21 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ArticleService } from '../../../shared/article.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Article } from '../../../shared/types';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SpinnerComponent } from '../../../components/spinner/spinner.component';
 import { AlertComponent } from '../../../components/alert/alert.component';
-import { MoreArticlesComponent } from './components/more-articles/more-articles.component';
-import { ArticleInfoComponent } from '../../../components/article-info/article-info.component';
-import { PublishButtonComponent } from '../components/publish-button/publish-button.component';
-import { AuthService } from '../../../shared/auth.service';
+import { ArticleEditorPageComponent } from '../article-editor-page/article-editor-page.component';
 
 @Component({
-  selector: 'app-article-view-page',
+  selector: 'app-article-edit-page',
   standalone: true,
-  imports: [
-    SpinnerComponent,
-    AlertComponent,
-    MoreArticlesComponent,
-    ArticleInfoComponent,
-    PublishButtonComponent,
-    RouterLink,
-  ],
-  templateUrl: './article-view-page.component.html',
+  imports: [SpinnerComponent, AlertComponent, ArticleEditorPageComponent],
+  templateUrl: './article-edit-page.component.html',
 })
-export class ArticleViewPageComponent implements OnInit {
+export class ArticleEditPageComponent implements OnInit {
   private articleService = inject(ArticleService);
   private route = inject(ActivatedRoute);
-  private authService = inject(AuthService);
 
   article!: Article;
 
@@ -51,13 +40,5 @@ export class ArticleViewPageComponent implements OnInit {
         },
       });
     });
-  }
-
-  onTogglePublish(value: string | null) {
-    this.article.publishedAt = value;
-  }
-
-  get isOwnedByLoggedInUser() {
-    return this.article.author.id === this.authService.user.getValue().id;
   }
 }

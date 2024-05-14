@@ -20,7 +20,7 @@
   </div>
   <div class="d-flex gap-2 py-2 px-2">
     @if(id) {
-    <app-publish-button [id]="id"></app-publish-button>
+    <app-publish-button [id]="id" [published]="published"></app-publish-button>
     }
     <app-button
       variant="success"
@@ -29,5 +29,8 @@
     >
       @if (id) { Update } @else { Save }
     </app-button>
+    @if(id) {
+    <a class="btn btn-warning" [routerLink]="previewUrl">Preview</a>
+    }
   </div>
 </div>

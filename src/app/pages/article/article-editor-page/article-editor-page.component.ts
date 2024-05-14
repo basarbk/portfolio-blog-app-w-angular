@@ -1,18 +1,27 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ArticleService } from '../../../shared/article.service';
 import { PublishButtonComponent } from '../components/publish-button/publish-button.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Article } from '../../../shared/types';
+import { AuthService } from '../../../shared/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-article-editor-page',
   standalone: true,
-  imports: [ButtonComponent, ReactiveFormsModule, PublishButtonComponent],
+  imports: [
+    ButtonComponent,
+    ReactiveFormsModule,
+    PublishButtonComponent,
+    RouterLink,
+  ],
   templateUrl: './article-editor-page.component.html',
 })
 export class ArticleEditorPageComponent {
   private articleService = inject(ArticleService);
+  private authService = inject(AuthService);
 
   title = new FormControl<string>('', {
     nonNullable: true,
@@ -25,6 +34,15 @@ export class ArticleEditorPageComponent {
 
   id: number = 0;
   apiProgress = false;
+
+  published = false;
+
+  @Input() set article(article: Article) {
+    this.title.setValue(article.title);
+    this.content.setValue(article.content);
+    this.id = article.id;
+    this.published = !!article.publishedAt;
+  }
 
   errors:
     | { title: string | undefined; content: string | undefined }
@@ -88,5 +106,9 @@ export class ArticleEditorPageComponent {
           }
         },
       });
+  }
+
+  get previewUrl() {
+    return `/${this.authService.user.getValue().handle}/${this.id}`;
   }
 }
