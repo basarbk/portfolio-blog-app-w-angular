@@ -7,6 +7,8 @@ import { SpinnerComponent } from '../../../components/spinner/spinner.component'
 import { AlertComponent } from '../../../components/alert/alert.component';
 import { MoreArticlesComponent } from './components/more-articles/more-articles.component';
 import { ArticleInfoComponent } from '../../../components/article-info/article-info.component';
+import { PublishButtonComponent } from '../components/publish-button/publish-button.component';
+import { AuthService } from '../../../shared/auth.service';
 
 @Component({
   selector: 'app-article-view-page',
@@ -16,12 +18,14 @@ import { ArticleInfoComponent } from '../../../components/article-info/article-i
     AlertComponent,
     MoreArticlesComponent,
     ArticleInfoComponent,
+    PublishButtonComponent,
   ],
   templateUrl: './article-view-page.component.html',
 })
 export class ArticleViewPageComponent implements OnInit {
   private articleService = inject(ArticleService);
   private route = inject(ActivatedRoute);
+  private authService = inject(AuthService);
 
   article!: Article;
 
@@ -46,5 +50,13 @@ export class ArticleViewPageComponent implements OnInit {
         },
       });
     });
+  }
+
+  onTogglePublish(value: string | null) {
+    this.article.publishedAt = value;
+  }
+
+  get isOwnedByLoggedInUser() {
+    return this.article.author.id === this.authService.user.getValue().id;
   }
 }

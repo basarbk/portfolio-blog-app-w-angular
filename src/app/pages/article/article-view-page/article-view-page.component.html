@@ -2,10 +2,20 @@
   <div class="col-lg-8">
     @switch (status) { @case ('success') {
     <main class="bg-white border rounded py-3 px-5">
-      <app-article-info
-        [author]="article.author"
-        [publishedAt]="article.publishedAt"
-      />
+      <div class="d-lg-flex align-items-center">
+        <app-article-info
+          class="flex-grow-1"
+          [author]="article.author"
+          [publishedAt]="article.publishedAt"
+        />
+        @if (isOwnedByLoggedInUser) {
+        <app-publish-button
+          [id]="article.id"
+          [published]="!!article.publishedAt"
+          (togglePublish)="onTogglePublish($event)"
+        />
+        }
+      </div>
       <div>
         <h1 class="text-capitalize">{{ article.title }}</h1>
       </div>
