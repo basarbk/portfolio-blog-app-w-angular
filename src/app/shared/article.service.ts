@@ -28,6 +28,12 @@ export class ArticleService {
     });
   }
 
+  fetchArticlesOfUser(handle: string, page: number = 0, size: number = 10) {
+    return this.httpClient.get<Page<Article>>(`/api/users/${handle}/articles`, {
+      params: { page, size, sort: 'published_at' },
+    });
+  }
+
   fetchArticle(idOrSlug: string) {
     return this.httpClient.get<Article>(`/api/articles/${idOrSlug}`);
   }

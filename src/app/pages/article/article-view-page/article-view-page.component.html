@@ -1,12 +1,19 @@
-@switch (status) { @case ('success') {
-<main class="bg-white border rounded py-3 px-5">
-  <div>
-    <h1 class="text-capitalize">{{ article?.title }}</h1>
+<div class="row">
+  <div class="col-lg-8">
+    @switch (status) { @case ('success') {
+    <main class="bg-white border rounded py-3 px-5">
+      <div>
+        <h1 class="text-capitalize">{{ article?.title }}</h1>
+      </div>
+      <div>{{ article?.content }}</div>
+    </main>
+    } @case ('fail') {
+    <app-alert variant="danger">{{ message }}</app-alert>
+    } @default {
+    <app-spinner [full]="true" size="regular"></app-spinner>
+    } }
   </div>
-  <div>{{ article?.content }}</div>
-</main>
-} @case ('fail') {
-<app-alert variant="danger">{{ message }}</app-alert>
-} @default {
-<app-spinner [full]="true" size="regular"></app-spinner>
-} }
+  <div class="col-lg-4">
+    <app-more-articles />
+  </div>
+</div>

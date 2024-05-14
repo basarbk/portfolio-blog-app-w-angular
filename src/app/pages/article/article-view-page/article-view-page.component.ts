@@ -5,11 +5,12 @@ import { Article } from '../../../shared/types';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SpinnerComponent } from '../../../components/spinner/spinner.component';
 import { AlertComponent } from '../../../components/alert/alert.component';
+import { MoreArticlesComponent } from './components/more-articles/more-articles.component';
 
 @Component({
   selector: 'app-article-view-page',
   standalone: true,
-  imports: [SpinnerComponent, AlertComponent],
+  imports: [SpinnerComponent, AlertComponent, MoreArticlesComponent],
   templateUrl: './article-view-page.component.html',
 })
 export class ArticleViewPageComponent implements OnInit {

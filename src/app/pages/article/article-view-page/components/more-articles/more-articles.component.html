@@ -1,0 +1,20 @@
+@if (data.content.length > 0) {
+<div class="bg-white border rounded p-3">
+  <span class="fs-4 fw-bold">More articles from </span
+  ><a
+    class="text-decoration-none fs-4 fw-bold text-capitalize"
+    [routerLink]="'/' + data.content[0].author.handle"
+    >{{ data.content[0].author.name }}</a
+  >
+  @for (article of data.content; track article.id) {
+  <div class="border-top py-2">
+    <a
+      class="text-decoration-none text-capitalize text-light-emphasis"
+      [routerLink]="'/' + article.author.handle + '/' + article.slug"
+    >
+      {{ article.title }}
+    </a>
+  </div>
+  }
+</div>
+}
