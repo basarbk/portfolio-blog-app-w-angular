@@ -1,4 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  inject,
+} from '@angular/core';
 import { ArticleService } from '../../shared/article.service';
 import { Article, Page } from '../../shared/types';
 import { ArticleCardComponent } from './components/article-card/article-card.component';
@@ -10,8 +17,10 @@ import { ButtonComponent } from '../button/button.component';
   imports: [ArticleCardComponent, ButtonComponent],
   templateUrl: './feed.component.html',
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit, OnChanges {
   private articleService = inject(ArticleService);
+
+  @Input() handle: string | null = null;
 
   data: Page<Article> = {
     content: [],
@@ -20,20 +29,41 @@ export class FeedComponent implements OnInit {
     total: 0,
   };
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['handle'].currentValue !== changes['handle'].previousValue &&
+      !changes['handle'].firstChange
+    ) {
+      this.data = {
+        content: [],
+        page: 0,
+        size: 5,
+        total: 0,
+      };
+      this.fetchData();
+    }
+  }
+
   ngOnInit(): void {
     this.fetchData();
   }
 
   fetchData(page: number = 0) {
-    this.articleService
-      .fetchArticles(page, this.data.size)
-      .subscribe((data) => {
-        this.data = {
-          content: [...this.data.content, ...data.content],
-          page: data.page,
-          size: data.size,
-          total: data.total,
-        };
-      });
+    const apiFn = this.handle
+      ? this.articleService.fetchArticlesOfUser(
+          this.handle,
+          page,
+          this.data.size
+        )
+      : this.articleService.fetchArticles(page, this.data.size);
+
+    apiFn.subscribe((data) => {
+      this.data = {
+        content: [...this.data.content, ...data.content],
+        page: data.page,
+        size: data.size,
+        total: data.total,
+      };
+    });
   }
 }
