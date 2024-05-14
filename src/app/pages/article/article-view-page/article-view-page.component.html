@@ -28,7 +28,7 @@
       <div>
         <h1 class="text-capitalize">{{ article.title }}</h1>
       </div>
-      <div>{{ article.content }}</div>
+      <div [innerHTML]="articleContent"></div>
     </main>
     } @case ('fail') {
     <app-alert variant="danger">{{ message }}</app-alert>

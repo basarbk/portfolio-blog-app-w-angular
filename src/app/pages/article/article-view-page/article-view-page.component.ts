@@ -9,6 +9,20 @@ import { MoreArticlesComponent } from './components/more-articles/more-articles.
 import { ArticleInfoComponent } from '../../../components/article-info/article-info.component';
 import { PublishButtonComponent } from '../components/publish-button/publish-button.component';
 import { AuthService } from '../../../shared/auth.service';
+import { Marked } from 'marked';
+import hljs from 'highlight.js';
+import { markedHighlight } from 'marked-highlight';
+import 'highlight.js/styles/atom-one-light.min.css';
+
+const marked = new Marked(
+  markedHighlight({
+    langPrefix: 'hljs language-',
+    highlight(code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    },
+  })
+);
 
 @Component({
   selector: 'app-article-view-page',
@@ -59,5 +73,9 @@ export class ArticleViewPageComponent implements OnInit {
 
   get isOwnedByLoggedInUser() {
     return this.article.author.id === this.authService.user.getValue().id;
+  }
+
+  get articleContent() {
+    return marked.parse(this.article.content);
   }
 }
