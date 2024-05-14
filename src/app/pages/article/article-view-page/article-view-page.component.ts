@@ -6,18 +6,24 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { SpinnerComponent } from '../../../components/spinner/spinner.component';
 import { AlertComponent } from '../../../components/alert/alert.component';
 import { MoreArticlesComponent } from './components/more-articles/more-articles.component';
+import { ArticleInfoComponent } from '../../../components/article-info/article-info.component';
 
 @Component({
   selector: 'app-article-view-page',
   standalone: true,
-  imports: [SpinnerComponent, AlertComponent, MoreArticlesComponent],
+  imports: [
+    SpinnerComponent,
+    AlertComponent,
+    MoreArticlesComponent,
+    ArticleInfoComponent,
+  ],
   templateUrl: './article-view-page.component.html',
 })
 export class ArticleViewPageComponent implements OnInit {
   private articleService = inject(ArticleService);
   private route = inject(ActivatedRoute);
 
-  article: Article | undefined;
+  article!: Article;
 
   status: 'loading' | 'success' | 'fail' = 'loading';
   message: string = '';

@@ -1,5 +1,9 @@
 <div class="card mb-3">
   <div class="card-body">
+    <app-article-info
+      [author]="article.author"
+      [publishedAt]="article.publishedAt"
+    />
     <a
       class="text-decoration-none text-dark fs-3"
       [routerLink]="'/' + article.author.handle + '/' + article.slug"

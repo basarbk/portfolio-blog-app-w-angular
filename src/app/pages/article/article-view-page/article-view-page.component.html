@@ -2,10 +2,14 @@
   <div class="col-lg-8">
     @switch (status) { @case ('success') {
     <main class="bg-white border rounded py-3 px-5">
+      <app-article-info
+        [author]="article.author"
+        [publishedAt]="article.publishedAt"
+      />
       <div>
-        <h1 class="text-capitalize">{{ article?.title }}</h1>
+        <h1 class="text-capitalize">{{ article.title }}</h1>
       </div>
-      <div>{{ article?.content }}</div>
+      <div>{{ article.content }}</div>
     </main>
     } @case ('fail') {
     <app-alert variant="danger">{{ message }}</app-alert>
