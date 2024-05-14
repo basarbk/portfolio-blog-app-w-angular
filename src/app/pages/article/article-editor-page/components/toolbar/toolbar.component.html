@@ -1,0 +1,10 @@
+<div class="bg-dark-subtle border rounded p-2 d-flex gap-2">
+  @for (action of actions; track $index) {
+  <button
+    class="btn btn-sm btn-outline-dark icon-link"
+    (click)="onClick(action.syntax)"
+  >
+    <span class="material-symbols-outlined">{{ action.icon }}</span>
+  </button>
+  }
+</div>

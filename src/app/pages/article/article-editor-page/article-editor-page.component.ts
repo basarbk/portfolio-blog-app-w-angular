@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Article } from '../../../shared/types';
 import { AuthService } from '../../../shared/auth.service';
 import { RouterLink } from '@angular/router';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-article-editor-page',
@@ -16,6 +17,7 @@ import { RouterLink } from '@angular/router';
     ReactiveFormsModule,
     PublishButtonComponent,
     RouterLink,
+    ToolbarComponent,
   ],
   templateUrl: './article-editor-page.component.html',
 })
@@ -110,5 +112,9 @@ export class ArticleEditorPageComponent {
 
   get previewUrl() {
     return `/${this.authService.user.getValue().handle}/${this.id}`;
+  }
+
+  onChangeContent(value: string) {
+    this.content.setValue(value);
   }
 }

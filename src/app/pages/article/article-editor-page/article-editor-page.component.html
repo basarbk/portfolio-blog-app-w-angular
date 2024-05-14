@@ -9,7 +9,9 @@
       [formControl]="title"
     ></textarea>
     <span class="text-danger small">{{ errors?.title }}</span>
+    <app-toolbar [editor]="editor" (onChange)="onChangeContent($event)" />
     <textarea
+      #editor
       class="flex-grow-1 no-outline"
       [class.border-0]="!errors?.content"
       [class.editor-error]="errors?.content"
