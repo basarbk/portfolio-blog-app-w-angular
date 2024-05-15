@@ -1,5 +1,9 @@
 <div class="d-flex flex-column editor-base">
   <div class="bg-white border rounded p-3 h-100 d-flex flex-column">
+    <app-image-selector
+      (onChangeImage)="onChangeImage($event)"
+      [image]="image"
+    />
     <textarea
       class="fs-1 no-outline"
       [class.border-0]="!errors?.title"

@@ -8,6 +8,7 @@ import { Article } from '../../../shared/types';
 import { AuthService } from '../../../shared/auth.service';
 import { RouterLink } from '@angular/router';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { ImageSelectorComponent } from '../../../components/image-selector/image-selector.component';
 
 @Component({
   selector: 'app-article-editor-page',
@@ -18,6 +19,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     PublishButtonComponent,
     RouterLink,
     ToolbarComponent,
+    ImageSelectorComponent,
   ],
   templateUrl: './article-editor-page.component.html',
 })
@@ -36,7 +38,7 @@ export class ArticleEditorPageComponent {
 
   id: number = 0;
   apiProgress = false;
-
+  image: string | null = null;
   published = false;
 
   @Input() set article(article: Article) {
@@ -44,6 +46,7 @@ export class ArticleEditorPageComponent {
     this.content.setValue(article.content);
     this.id = article.id;
     this.published = !!article.publishedAt;
+    this.image = article.image;
   }
 
   errors:
@@ -93,6 +96,7 @@ export class ArticleEditorPageComponent {
         {
           title: this.title.value,
           content: this.content.value,
+          image: this.image,
         },
         this.id
       )
@@ -116,5 +120,9 @@ export class ArticleEditorPageComponent {
 
   onChangeContent(value: string) {
     this.content.setValue(value);
+  }
+
+  onChangeImage(value: string | null) {
+    this.image = value;
   }
 }

@@ -1,0 +1,16 @@
+<div class="d-flex align-items-center gap-2">
+  @if (image) {
+  <img [src]="'/api/assets/' + image" class="img-thumbnail" width="200" />
+  }
+  <div class="d-flex flex-column gap-2">
+    <button class="btn btn-outline-success btn-sm" (click)="imageInput.click()">
+      Add Image
+      <input type="file" hidden #imageInput (change)="onSelectImage($event)" />
+    </button>
+    @if (image) {
+    <button class="btn btn-outline-danger btn-sm" (click)="deleteImage()">
+      Delete Image
+    </button>
+    }
+  </div>
+</div>
