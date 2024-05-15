@@ -1,34 +1,41 @@
 <div class="row">
   <div class="col-lg-8">
     @switch (status) { @case ('success') {
-    <main class="bg-white border rounded py-3 px-5">
-      <div class="d-lg-flex align-items-center">
-        <app-article-info
-          class="flex-grow-1"
-          [author]="article.author"
-          [publishedAt]="article.publishedAt"
-        />
-        @if (isOwnedByLoggedInUser) {
-        <div class="d-flex gap-2">
-          <app-publish-button
-            [id]="article.id"
-            [published]="!!article.publishedAt"
-            (togglePublish)="onTogglePublish($event)"
+    <main class="bg-white border rounded">
+      <app-image-with-fallback
+        [image]="article.image"
+        classNames="rounded-top"
+        height="300"
+      />
+      <div class="py-3 px-5">
+        <div class="d-lg-flex align-items-center">
+          <app-article-info
+            class="flex-grow-1"
+            [author]="article.author"
+            [publishedAt]="article.publishedAt"
           />
-          <a
-            class="btn btn-warning"
-            [routerLink]="
-              '/' + article.author.handle + '/' + article.slug + '/edit'
-            "
-            >Edit</a
-          >
+          @if (isOwnedByLoggedInUser) {
+          <div class="d-flex gap-2">
+            <app-publish-button
+              [id]="article.id"
+              [published]="!!article.publishedAt"
+              (togglePublish)="onTogglePublish($event)"
+            />
+            <a
+              class="btn btn-warning"
+              [routerLink]="
+                '/' + article.author.handle + '/' + article.slug + '/edit'
+              "
+              >Edit</a
+            >
+          </div>
+          }
         </div>
-        }
+        <div>
+          <h1 class="text-capitalize">{{ article.title }}</h1>
+        </div>
+        <div [innerHTML]="articleContent"></div>
       </div>
-      <div>
-        <h1 class="text-capitalize">{{ article.title }}</h1>
-      </div>
-      <div [innerHTML]="articleContent"></div>
     </main>
     } @case ('fail') {
     <app-alert variant="danger">{{ message }}</app-alert>

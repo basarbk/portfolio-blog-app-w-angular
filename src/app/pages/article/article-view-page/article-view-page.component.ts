@@ -13,6 +13,7 @@ import { Marked } from 'marked';
 import hljs from 'highlight.js';
 import { markedHighlight } from 'marked-highlight';
 import 'highlight.js/styles/atom-one-light.min.css';
+import { ImageWithFallbackComponent } from '../../../components/image-with-fallback/image-with-fallback.component';
 
 const marked = new Marked(
   markedHighlight({
@@ -42,6 +43,7 @@ marked.use({
     ArticleInfoComponent,
     PublishButtonComponent,
     RouterLink,
+    ImageWithFallbackComponent,
   ],
   templateUrl: './article-view-page.component.html',
 })

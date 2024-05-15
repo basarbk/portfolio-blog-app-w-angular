@@ -1,10 +1,10 @@
 <div class="d-flex gap-3 align-items-center">
   <a [routerLink]="'/' + author.handle">
-    <img
-      class="rounded-circle shadow-sm"
-      src="assets/profile.png"
-      width="30"
+    <app-image-with-fallback
+      classNames="rounded-circle shadow-sm"
       height="30"
+      fallback="profile"
+      [image]="author.image"
     />
   </a>
   <div class="d-flex flex-column">
