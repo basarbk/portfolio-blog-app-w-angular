@@ -1,1 +1,2 @@
-<app-feed />
+<app-filter (setFilter)="onChangeFilter($event)" />
+<app-feed [filter]="filter" />
