@@ -21,3 +21,5 @@ export type Author = {
   handle: string;
   image: string | null;
 };
+
+export type Reaction = 'like' | 'readingList' | 'hot';
