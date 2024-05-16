@@ -1,6 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { ReactionService } from './reaction.service';
 import { Reaction, ReactionDetails } from '../../shared/types';
+import { AuthService } from '../../shared/auth.service';
 
 @Component({
   selector: 'app-reaction-button',
@@ -9,6 +10,7 @@ import { Reaction, ReactionDetails } from '../../shared/types';
   templateUrl: './reaction-button.component.html',
 })
 export class ReactionButtonComponent {
+  private authService = inject(AuthService);
   @Input() category!: Reaction;
   @Input() entityId!: number;
 
@@ -38,7 +40,7 @@ export class ReactionButtonComponent {
   private reactionService = inject(ReactionService);
 
   get style() {
-    if (!this.reacted) return '';
+    if (!this.reacted || this.authService.user.getValue().id === 0) return '';
     return `font-variation-settings:
     'FILL' 1,
     'wght' 400,
@@ -47,6 +49,9 @@ export class ReactionButtonComponent {
   }
 
   onClick() {
+    if (this.authService.user.getValue().id === 0) {
+      return;
+    }
     this.reactionService
       .reactToArticle(this.entityId, this.category)
       .subscribe((data) => {
