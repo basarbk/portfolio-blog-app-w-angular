@@ -12,4 +12,9 @@
   <div class="card-body">
     <span class="fs-3">{{ user?.name }}</span>
   </div>
+  @if(isLoggedInUser) {
+  <div class="card-footer">
+    <a class="btn btn-primary" routerLink="/edit">Edit</a>
+  </div>
+  }
 </div>

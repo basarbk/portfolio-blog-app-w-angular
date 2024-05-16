@@ -11,4 +11,8 @@ export class UserService {
   fetchUser(handle: string) {
     return this.httpClient.get<Author>(`/api/users/${handle}`);
   }
+
+  updateUser(id: number, body: { name: string; image: string | null }) {
+    return this.httpClient.put<Author>(`/api/users/${id}`, body);
+  }
 }

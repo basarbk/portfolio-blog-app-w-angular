@@ -3,12 +3,20 @@
   <img [src]="'/api/assets/' + image" class="img-thumbnail" width="200" />
   }
   <div class="d-flex flex-column gap-2">
-    <button class="btn btn-outline-success btn-sm" (click)="imageInput.click()">
+    <button
+      class="btn btn-outline-success btn-sm"
+      (click)="imageInput.click()"
+      type="button"
+    >
       Add Image
       <input type="file" hidden #imageInput (change)="onSelectImage($event)" />
     </button>
     @if (image) {
-    <button class="btn btn-outline-danger btn-sm" (click)="deleteImage()">
+    <button
+      class="btn btn-outline-danger btn-sm"
+      (click)="deleteImage()"
+      type="button"
+    >
       Delete Image
     </button>
     }

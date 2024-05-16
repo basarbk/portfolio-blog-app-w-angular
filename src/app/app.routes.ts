@@ -7,6 +7,7 @@ import { ArticleEditorPageComponent } from './pages/article/article-editor-page/
 import { ArticleViewPageComponent } from './pages/article/article-view-page/article-view-page.component';
 import { UserViewPageComponent } from './pages/user/user-view-page/user-view-page.component';
 import { ArticleEditPageComponent } from './pages/article/article-edit-page/article-edit-page.component';
+import { UserEditPageComponent } from './pages/user/user-edit-page/user-edit-page.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,10 @@ export const routes: Routes = [
   {
     path: ':handle/:idOrSlug/edit',
     component: ArticleEditPageComponent,
+  },
+  {
+    path: 'edit',
+    component: UserEditPageComponent,
   },
   {
     path: ':handle',

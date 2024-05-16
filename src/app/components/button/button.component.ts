@@ -6,21 +6,20 @@ import { SpinnerComponent } from '../spinner/spinner.component';
   selector: 'app-button',
   standalone: true,
   imports: [SpinnerComponent],
-  templateUrl: './button.component.html'
+  templateUrl: './button.component.html',
 })
 export class ButtonComponent {
+  @Input() variant: Variant = 'primary';
 
-  @Input() variant: Variant = 'primary'
+  @Input() disabled = false;
 
-  @Input() disabled = false
+  @Input() apiProgress = false;
 
-  @Input() apiProgress = false
+  @Output() onClick = new EventEmitter<void>();
 
-  @Output() onClick = new EventEmitter<void>()
-
-  get buttonClass(){
-    const classes = ['btn']
-    classes.push(`btn-${this.variant}`)
-    return classes.join(' ')
+  get buttonClass() {
+    const classes = ['btn'];
+    classes.push(`btn-${this.variant}`);
+    return classes.join(' ');
   }
 }
