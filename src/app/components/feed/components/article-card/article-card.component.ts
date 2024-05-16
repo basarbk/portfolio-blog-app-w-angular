@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Article } from '../../../../shared/types';
+import { AVAILABLE_REACTIONS, Article } from '../../../../shared/types';
 import { RouterLink } from '@angular/router';
 import { ArticleInfoComponent } from '../../../article-info/article-info.component';
 import { ImageWithFallbackComponent } from '../../../image-with-fallback/image-with-fallback.component';
@@ -18,4 +18,5 @@ import { ReactionButtonComponent } from '../../../reaction-button/reaction-butto
 })
 export class ArticleCardComponent {
   @Input() article!: Article;
+  reactions = AVAILABLE_REACTIONS;
 }

@@ -31,6 +31,15 @@
           </div>
           }
         </div>
+        <div class="d-flex gap-2 py-2">
+          @for (reaction of reactions; track $index) {
+          <app-reaction-button
+            [category]="reaction"
+            [entityId]="article.id"
+            [details]="article.reactions[reaction]"
+          />
+          }
+        </div>
         <div>
           <h1 class="text-capitalize">{{ article.title }}</h1>
         </div>

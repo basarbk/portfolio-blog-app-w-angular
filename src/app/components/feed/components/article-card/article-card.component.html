@@ -18,7 +18,15 @@
         >
           {{ article.title }}
         </a>
-        <app-reaction-button category="readingList" [entityId]="article.id" />
+        <div class="d-flex gap-2">
+          @for (reaction of reactions; track $index) {
+          <app-reaction-button
+            [category]="reaction"
+            [entityId]="article.id"
+            [details]="article.reactions[reaction]"
+          />
+          }
+        </div>
       </div>
     </div>
   </div>

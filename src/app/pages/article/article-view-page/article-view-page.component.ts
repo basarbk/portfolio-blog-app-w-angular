@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ArticleService } from '../../../shared/article.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Article } from '../../../shared/types';
+import { AVAILABLE_REACTIONS, Article } from '../../../shared/types';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SpinnerComponent } from '../../../components/spinner/spinner.component';
 import { AlertComponent } from '../../../components/alert/alert.component';
@@ -14,6 +14,7 @@ import hljs from 'highlight.js';
 import { markedHighlight } from 'marked-highlight';
 import 'highlight.js/styles/atom-one-light.min.css';
 import { ImageWithFallbackComponent } from '../../../components/image-with-fallback/image-with-fallback.component';
+import { ReactionButtonComponent } from '../../../components/reaction-button/reaction-button.component';
 
 const marked = new Marked(
   markedHighlight({
@@ -44,6 +45,7 @@ marked.use({
     PublishButtonComponent,
     RouterLink,
     ImageWithFallbackComponent,
+    ReactionButtonComponent,
   ],
   templateUrl: './article-view-page.component.html',
 })
@@ -56,6 +58,8 @@ export class ArticleViewPageComponent implements OnInit {
 
   status: 'loading' | 'success' | 'fail' = 'loading';
   message: string = '';
+
+  reactions = AVAILABLE_REACTIONS;
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { ReactionService } from './reaction.service';
-import { Reaction } from '../../shared/types';
+import { Reaction, ReactionDetails } from '../../shared/types';
 
 @Component({
   selector: 'app-reaction-button',
@@ -28,6 +28,12 @@ export class ReactionButtonComponent {
   };
 
   reacted = false;
+  count = 0;
+
+  @Input() set details(value: ReactionDetails) {
+    this.reacted = value.reacted;
+    this.count = value.count;
+  }
 
   private reactionService = inject(ReactionService);
 
@@ -45,6 +51,11 @@ export class ReactionButtonComponent {
       .reactToArticle(this.entityId, this.category)
       .subscribe((data) => {
         this.reacted = data.result;
+        if (this.reacted) {
+          this.count += 1;
+        } else {
+          this.count -= 1;
+        }
       });
   }
 }
