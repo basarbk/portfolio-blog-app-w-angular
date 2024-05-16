@@ -1,0 +1,12 @@
+<a class="nav-link active" [routerLink]="link">
+  <div class="d-flex gap-2 icon-link">
+    <app-image-with-fallback
+      fallback="profile"
+      [image]="image"
+      height="30"
+      classNames="rounded-circle shadow-sm"
+      style="width: 30px"
+    />
+    {{ name }}
+  </div>
+</a>
