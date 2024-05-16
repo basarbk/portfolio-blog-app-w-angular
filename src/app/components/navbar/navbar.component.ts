@@ -17,8 +17,4 @@ export class NavbarComponent {
       this.loggedIn = data.id > 0;
     });
   }
-
-  logout() {
-    this.authService.logout().subscribe();
-  }
 }

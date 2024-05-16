@@ -1,12 +1,23 @@
-<a class="nav-link active" [routerLink]="link">
-  <div class="d-flex gap-2 icon-link">
-    <app-image-with-fallback
-      fallback="profile"
-      [image]="image"
-      height="30"
-      classNames="rounded-circle shadow-sm"
-      style="width: 30px"
-    />
-    {{ name }}
-  </div>
-</a>
+<div class="dropdown" #dropdown>
+  <a class="nav-link active" role="button" (click)="toggle()">
+    <div class="d-flex gap-2 icon-link">
+      <app-image-with-fallback
+        fallback="profile"
+        [image]="image"
+        height="30"
+        classNames="rounded-circle shadow-sm"
+        style="width: 30px"
+      />
+      {{ name }}
+    </div>
+  </a>
+  <ul class="dropdown-menu end-0" [class.show]="show">
+    <li><a class="dropdown-item" [routerLink]="link">Profile</a></li>
+    <li><a class="dropdown-item" routerLink="/edit">Edit</a></li>
+    <li>
+      <span class="dropdown-item" style="cursor: pointer" (click)="logout()"
+        >Logout</span
+      >
+    </li>
+  </ul>
+</div>
