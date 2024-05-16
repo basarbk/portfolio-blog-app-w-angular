@@ -1,0 +1,15 @@
+<div class="card mb-3 text-center">
+  <div class="card-header">
+    <div class="d-inline-block" style="width: 200px">
+      <app-image-with-fallback
+        classNames="rounded-circle shadow-sm"
+        height="200"
+        fallback="profile"
+        [image]="user?.image ?? null"
+      />
+    </div>
+  </div>
+  <div class="card-body">
+    <span class="fs-3">{{ user?.name }}</span>
+  </div>
+</div>
